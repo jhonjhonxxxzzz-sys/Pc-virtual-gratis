@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080b18">
+<title>ULTRA PC RTX 3050</title>
+<style>
+*{box-sizing:border-box}
+:root{
+ --bg:#080b18;--panel:#11182b;--line:#293856;
+ --blue:#38bdf8;--purple:#8b5cf6;--text:#eef4ff;
+}
+body{
+ margin:0;background:var(--bg);color:var(--text);
+ font-family:Arial,sans-serif;min-height:100vh;
+ background-image:radial-gradient(ellipse at 70% 10%,#17345c,transparent 50%);
+}
+button,input,textarea{font:inherit}
+button{
+ cursor:pointer;color:white;background:#192640;
+ border:1px solid #354967;border-radius:9px;padding:10px;
+}
+button:hover{border-color:var(--blue);background:#243959}
+header{
+ display:flex;justify-content:space-between;align-items:center;
+ gap:10px;padding:14px 18px;background:#080b18ee;
+ border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;
+}
+.logo{font-weight:900;color:var(--blue);letter-spacing:1px}
+.status{font-size:11px;color:#4ade80}
+main{max-width:1000px;margin:auto;padding:20px}
+.hero,.card,.window{
+ background:#10182add;border:1px solid var(--line);
+ border-radius:15px;padding:17px;margin-bottom:15px;
+}
+h1{font-size:clamp(26px,6vw,42px);margin:10px 0}
+h2{font-size:19px}
+p{color:#a9bad2;line-height:1.5}
+.grid{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;
+}
+.metric{font-size:22px;font-weight:bold;color:var(--blue);margin:8px 0}
+.small{font-size:12px;color:#91a4c1}
+.bar{height:6px;background:#29354a;border-radius:9px;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--purple))}
+.apps{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;
+}
+.app{min-height:86px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.ico{font-size:26px}
+.window{display:none}
+.window-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.window-body{padding-top:12px}
+input,textarea{
+ width:100%;padding:12px;background:#080d19;color:white;
+ border:1px solid #344663;border-radius:9px;margin:8px 0;
+}
+textarea{min-height:180px;resize:vertical}
+.taskbar{
+ position:sticky;bottom:0;z-index:4;
+ display:flex;justify-content:center;gap:9px;align-items:center;
+ padding:10px;background:#080b18f2;border-top:1px solid var(--line);
+ backdrop-filter:blur(12px);
+}
+.taskbar button{padding:10px 13px}
+footer{text-align:center;padding:20px;color:#778ba8;font-size:12px}
+@media(max-width:480px){
+ main{padding:12px}
+ header{padding:12px}
+ .logo{font-size:14px}
+ .apps{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .app{padding:8px 3px;font-size:12px}
+ .taskbar{gap:5px}
+ .taskbar button{padding:9px}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">⚡ ULTRA PC</div>
+ <div class="status">● INTERFACE ATIVA</div>
+</header>
+
+<main>
+ <section class="hero">
+  <div class="small">GAMING DESKTOP • CLOUD EDITION</div>
+  <h1>Bem-vindo ao seu PC</h1>
+  <p>Seu espaço virtual para aplicativos, ferramentas e jogos.</p>
+  <div class="grid">
+   <div>
+    <div class="small">GPU DESEJADA</div>
+    <div class="metric">RTX 3050</div>
+   </div>
+   <div>
+    <div class="small">PROCESSADOR DESEJADO</div>
+    <div class="metric">Ryzen 7</div>
+   </div>
+   <div>
+    <div class="small">MEMÓRIA DESEJADA</div>
+    <div class="metric">32 GB RAM</div>
+    <div class="bar"><div class="fill" style="width:85%"></div></div>
+   </div>
+   <div>
+    <div class="small">ARMAZENAMENTO DESEJADO</div>
+    <div class="metric">SSD 1 TB</div>
+    <div class="bar"><div class="fill" style="width:90%"></div></div>
+   </div>
+  </div>
+  <p class="small">Hardware ilustrativo. Esta página não mede nem fornece esses recursos.</p>
+ </section>
+
+ <section class="card">
+  <h2>Área de trabalho</h2>
+  <div class="apps">
+   <button class="app" onclick="openApp('files')"><span class="ico">📁</span>Arquivos</button>
+   <button class="app" onclick="openApp('terminal')"><span class="ico">⌨️</span>Terminal</button>
+   <button class="app" onclick="openApp('notes')"><span class="ico">📝</span>Notas</button>
+   <button class="app" onclick="openApp('games')"><span class="ico">🎮</span>Jogos</button>
+   <button class="app" onclick="openApp('browser')"><span class="ico">🌐</span>Internet</button>
+   <button class="app" onclick="openApp('settings')"><span class="ico">⚙️</span>Sistema</button>
+  </div>
+ </section>
+
+ <section class="window" id="window">
+  <div class="window-head">
+   <strong id="title">Aplicativo</strong>
+   <button onclick="closeApp()">✕ Fechar</button>
+  </div>
+  <div class="window-body" id="body"></div>
+ </section>
+</main>
+
+<div class="taskbar">
+ <button onclick="openApp('start')">⊞ Iniciar</button>
+ <button onclick="openApp('games')">🎮 Jogos</button>
+ <button onclick="openApp('files')">📁</button>
+ <span id="clock" class="small">--:--</span>
+</div>
+
+<footer>ULTRA PC RTX 3050 • Projeto web experimental</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const win = $('window');
+
+function tick(){
+ $('clock').textContent=new Date().toLocaleTimeString('pt-BR',{
+  hour:'2-digit',minute:'2-digit'
+ });
+}
+tick();
+setInterval(tick,1000);
+
+function openApp(name){
+ const pages={
+ start:['Menu iniciar',`
+  <h2>Aplicativos</h2>
+  <div class="apps">
+   <button onclick="openApp('files')">📁 Arquivos</button>
+   <button onclick="openApp('terminal')">⌨️ Terminal</button>
+   <button onclick="openApp('games')">🎮 Jogos</button>
+   <button onclick="openApp('settings')">⚙️ Sistema</button>
+  </div>`],
+ files:['Explorador de arquivos',`
+  <p>📁 Documentos</p><p>📁 Downloads</p>
+  <p>📁 Imagens</p><p>📁 Jogos</p>
+  <p class="small">Pastas de demonstração. Não são arquivos de um Windows remoto.</p>`],
+ terminal:['Terminal virtual',`
+  <p>ULTRA Terminal • Simulador</p>
+  <pre id="output">Digite help para ver os comandos.</pre>
+  <input id="cmd" placeholder="help, date, about ou clear">
+  <button onclick="runCommand()">Executar</button>`],
+ notes:['Bloco de notas',`
+  <textarea id="notes" placeholder="Escreva suas anotações..."></textarea>
+  <button onclick="saveNotes()">Salvar notas</button>
+  <p id="saveStatus" class="small"></p>`],
+ games:['Central gamer',`
+  <h2>Escolha seu jogo</h2>
+  <p>🎮 Fortnite</p>
+  <button onclick="visit('https://www.xbox.com/play')">Ver Xbox Cloud Gaming</button>
+  <p>🚗 GTA V</p>
+  <button onclick="visit('https://www.nvidia.com/en-us/geforce-now/')">Ver GeForce NOW</button>
+  <p>🧱 Roblox</p>
+  <button onclick="visit('https://www.roblox.com/')">Abrir Roblox</button>
+  <p>🏎️ Forza Horizon 5</p>
+  <button onclick="visit('https://www.xbox.com/play')">Ver catálogo Xbox</button>
+  <p class="small">Disponibilidade, propriedade do jogo e assinatura dependem do serviço.</p>`],
+ browser:['Abrir site',`
+  <input id="url" placeholder="Digite um endereço de site">
+  <button onclick="visitInput()">Abrir em nova aba</button>`],
+ settings:['Configurações',`
+  <h2>Informações do projeto</h2>
+  <p>Interface: ULTRA PC</p>
+  <p>Modo: demonstração no navegador</p>
+  <p>Hardware remoto: não conectado</p>
+  <button onclick="document.documentElement.requestFullscreen()">Tela cheia</button>
+  <p>Para usar um Windows real, configure um host remoto e um cliente de streaming.</p>`]
+ };
+ const p=pages[name];
+ if(!p)return;
+ $('title').textContent=p[0];
+ $('body').innerHTML=p[1];
+ win.style.display='block';
+ win.scrollIntoView({behavior:'smooth',block:'nearest'});
+ if(name==='notes'){
+  $('notes').value=localStorage.getItem('ultraNotes')||'';
+ }
+}
+function closeApp(){win.style.display='none'}
+
+function runCommand(){
+ const input=$('cmd'),output=$('output');
+ if(!input||!output)return;
+ const raw=input.value.trim();
+ const cmd=raw.toLowerCase();
+ const commands={
+  help:'Comandos: help, date, about, clear',
+  date:new Date().toLocaleString('pt-BR'),
+  about:'ULTRA PC - terminal demonstrativo, sem acesso ao sistema operacional.'
+ };
+ if(cmd==='clear')output.textContent='';
+ else output.textContent+='\\n> '+raw+'\\n'+
+  (commands[cmd]||'Comando desconhecido. Digite help.');
+ input.value='';
+}
+function saveNotes(){
+ localStorage.setItem('ultraNotes',$('notes').value);
+ $('saveStatus').textContent='Notas salvas neste navegador.';
+}
+function visit(url){
+ window.open(url,'_blank','noopener,noreferrer');
+}
+function visitInput(){
+ let url=$('url').value.trim();
+ if(!url)return;
+ if(!/^https?:\\/\\//i.test(url))url='https://'+url;
+ try{
+  const u=new URL(url);
+  if(u.protocol==='http:'||u.protocol==='https:')visit(u.href);
+ }catch(e){}
+}
+</script>
+</body>
+</html>
